@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Case {
+  id            Int      @id @default(autoincrement())
+  reviewNumber  String   @unique  // 審査番号
+  gameTitle     String            // タイトル名
+  caseTitle     String            // 事例タイトル
+  summary       String            // 事例概要
+  ceroRating    String            // CERO レーティング: A, B, C, D, Z
+  searchVector  String?           // Embedding JSON (for semantic search)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  media         Media[]
+}
+
+model Media {
+  id        Int      @id @default(autoincrement())
+  caseId    Int
+  type      String   // "video" | "image"
+  filename  String
+  url       String
+  case      Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
