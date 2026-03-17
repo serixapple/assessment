@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画像ブログ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📷 画像ブログ</h1>
+    <p class="subtitle">日常の記録</p>
+  </header>
+
+  <main>
+    <!-- 投稿フォーム -->
+    <section class="post-form card">
+      <h2>新しい投稿</h2>
+      <div class="form-group">
+        <label for="image-upload">画像を選択</label>
+        <input type="file" id="image-upload" accept="image/*" multiple>
+        <div id="image-previews" class="image-previews"></div>
+      </div>
+      <div class="form-group">
+        <label for="post-title">タイトル</label>
+        <input type="text" id="post-title" placeholder="タイトルを入力...">
+      </div>
+      <div class="form-group">
+        <label for="post-description">説明</label>
+        <textarea id="post-description" placeholder="説明を入力..." rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="tag-input">タグ</label>
+        <div class="tag-input-wrapper">
+          <input type="text" id="tag-input" placeholder="タグを入力してEnterキーを押す...">
+          <div id="tag-list" class="tag-list"></div>
+        </div>
+      </div>
+      <button id="submit-btn" class="btn btn-primary">投稿する</button>
+    </section>
+
+    <!-- 検索・フィルター -->
+    <section class="search-section">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="タイトル・説明・タグで検索...">
+        <button id="clear-search" class="btn btn-secondary">クリア</button>
+      </div>
+      <div id="filter-tags" class="filter-tags">
+        <span class="filter-label">タグで絞り込み:</span>
+        <div id="all-tags-filter" class="tags-container"></div>
+      </div>
+    </section>
+
+    <!-- 投稿一覧 -->
+    <section id="posts-container" class="posts-grid"></section>
+
+    <div id="empty-state" class="empty-state" style="display:none">
+      <p>投稿が見つかりません</p>
+    </div>
+  </main>
+
+  <!-- 画像モーダル -->
+  <div id="modal" class="modal" style="display:none">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close">&times;</button>
+      <img id="modal-image" src="" alt="">
+      <div class="modal-info">
+        <h3 id="modal-title"></h3>
+        <p id="modal-date"></p>
+        <p id="modal-description"></p>
+        <div id="modal-tags" class="tag-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
